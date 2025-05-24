@@ -1,0 +1,45 @@
+package com.procurehackathon.controller;
+
+import com.procurehackathon.model.UserModel;
+import com.procurehackathon.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping
+    public ResponseEntity<List<UserModel>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserModel> getUserById(@PathVariable Long id) {
+        Optional<UserModel> user = userService.getUserById(id);
+        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<UserModel> createUser(@RequestBody UserModel user) {
+        return ResponseEntity.ok(userService.createUser(user));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserModel> updateUser(@PathVariable Long id, @RequestBody UserModel userDetails) {
+        return ResponseEntity.ok(userService.updateUser(id, userDetails));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+} 

@@ -42,4 +42,7 @@ application-local.properties
 application-dev.properties
 
 ### Frontend ###
-my-procurement-frontend/ 
+my-procurement-frontend/
+
+### macOS ###
+.DS_Store 

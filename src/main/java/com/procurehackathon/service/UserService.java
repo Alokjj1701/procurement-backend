@@ -1,6 +1,6 @@
 package com.procurehackathon.service;
 
-import com.procurehackathon.model.UserModel;
+import com.procurehackathon.entity.User;
 import com.procurehackathon.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,24 +16,24 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<UserModel> getAllUsers() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public Optional<UserModel> getUserById(Long id) {
+    public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
-    public UserModel createUser(UserModel user) {
+    public User createUser(User user) {
         return userRepository.save(user);
     }
 
-    public Optional<UserModel> getUserByEmail(String email) {
+    public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    public UserModel updateUser(Long id, UserModel userDetails) {
-        UserModel user = userRepository.findById(id)
+    public User updateUser(Long id, User userDetails) {
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
 
         user.setName(userDetails.getName());
@@ -45,7 +45,7 @@ public class UserService {
     }
 
     public void deleteUser(Long id) {
-        UserModel user = userRepository.findById(id)
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
         userRepository.delete(user);
     }

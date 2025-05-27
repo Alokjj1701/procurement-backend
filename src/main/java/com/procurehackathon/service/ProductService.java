@@ -30,6 +30,10 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
+    public long countTotalProducts() {
+        return productRepository.count();
+    }
+
     // Add more product-related business logic methods here
     // e.g., createProduct, updateProduct, deleteProduct, etc.
 } 

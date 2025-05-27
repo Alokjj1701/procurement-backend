@@ -22,7 +22,11 @@ public class RequestController {
     }
 
     @GetMapping
-    public List<Request> getAllRequests() {
+    public List<Request> getAllRequests(@RequestParam(required = false) String assignedTo) {
+        if (assignedTo != null && assignedTo.equals("me")) {
+            // TODO: Get the current user's ID from the security context
+            return requestService.getRequestsByAssignee(1L); // Temporarily hardcoded to user ID 1
+        }
         return requestService.getAllRequests();
     }
 

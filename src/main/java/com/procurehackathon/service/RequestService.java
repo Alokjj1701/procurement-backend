@@ -1,6 +1,7 @@
 package com.procurehackathon.service;
 
 import com.procurehackathon.model.Request;
+import com.procurehackathon.model.RequestStatus;
 import com.procurehackathon.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,25 @@ public class RequestService {
     private RequestRepository requestRepository;
 
     public List<Request> getAllRequests() {
-        return requestRepository.findAll();
+        List<Request> requests = requestRepository.findAll();
+        // Eagerly load product data
+        requests.forEach(request -> {
+            if (request.getProduct() != null) {
+                request.getProduct().getName(); // Force load
+            }
+        });
+        return requests;
+    }
+
+    public List<Request> getRequestsByAssignee(Long assigneeId) {
+        List<Request> requests = requestRepository.findByStatus("Pending");
+        // Eagerly load product data
+        requests.forEach(request -> {
+            if (request.getProduct() != null) {
+                request.getProduct().getName(); // Force load
+            }
+        });
+        return requests;
     }
 
     public Optional<Request> getRequestById(Long id) {
@@ -34,6 +53,10 @@ public class RequestService {
 
     public void deleteRequest(Long id) {
         requestRepository.deleteById(id);
+    }
+
+    public long countPendingRequests() {
+        return requestRepository.countByStatus(RequestStatus.PENDING);
     }
 
     // Add more request-related business logic methods here

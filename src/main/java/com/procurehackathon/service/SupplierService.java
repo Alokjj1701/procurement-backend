@@ -1,6 +1,7 @@
 package com.procurehackathon.service;
 
 import com.procurehackathon.model.Supplier;
+import com.procurehackathon.model.SupplierStatus;
 import com.procurehackathon.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,10 @@ public class SupplierService {
 
     public void deleteSupplier(Long id) {
         supplierRepository.deleteById(id);
+    }
+
+    public long countActiveSuppliers() {
+        return supplierRepository.countByStatus(SupplierStatus.ACTIVE);
     }
 
     // Add more supplier-related business logic methods here

@@ -1,6 +1,65 @@
-HELP.md
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Production
+/build
+/dist
+
+# Misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# Java
 target/
-!.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.ctxt
+.mtj.tmp/
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+
+# Spring Boot
+spring-boot-starter/
+*.properties
+!src/main/resources/application.properties
+
+# Database
+*.db
+*.sqlite
+procurement_db.db
+
+HELP.md
 !**/src/main/**/target/
 !**/src/test/**/target/
 
@@ -14,18 +73,14 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
 *.iws
-*.iml
 *.ipr
 
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
-/dist/
 /nbdist/
 /.nb-gradle/
-build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
@@ -33,7 +88,6 @@ build/
 .vscode/
 
 ### Logs ###
-*.log
 logs/
 
 ### Environment Variables ###
@@ -42,7 +96,12 @@ application-local.properties
 application-dev.properties
 
 ### Frontend ###
-my-procurement-frontend/
+my-procurement-frontend/.env
+my-procurement-frontend/.env.local
+my-procurement-frontend/.env.development
+my-procurement-frontend/.env.production
 
-### macOS ###
-.DS_Store 
+### Backend ###
+procurement-backend/.env
+procurement-backend/application-local.properties
+procurement-backend/application-dev.properties 
